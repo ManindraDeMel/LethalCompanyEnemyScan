@@ -12,7 +12,7 @@ namespace EnemyScan
     {
         private const string modGUID = "299792458.EnemyScan";
         private const string modName = "EnemyScan";
-        private const string modVersion = "1.0.0";
+        private const string modVersion = "1.0.1";
 
         void Awake()
         {

@@ -54,7 +54,10 @@ namespace EnemyScan.Helper
             {
                 sb.AppendLine($"{pair.Key}: {pair.Value}");
             }
-
+            if (sb.ToString() == "")
+            {
+                return "No Enemies Found..";
+            }
             return sb.ToString();
         }
     }
