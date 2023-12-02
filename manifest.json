@@ -1,0 +1,10 @@
+{
+    "name": "Scan for enemies",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/ManindraDeMel/LethalCompanyEnemyScan",
+    "description": "Scan for the type and amount of each enemy on the map with the 'list enemies' or 'enemies' command in the terminal.",
+    "dependencies": [
+        "BepInEx-BepInExPack-5.4.2100",
+        "NotAtomicBomb-TerminalApi-1.1.0"
+    ]
+}
