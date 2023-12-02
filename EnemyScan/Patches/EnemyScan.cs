@@ -1,20 +1,33 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using HarmonyLib;
-using TerminalApi;
 using EnemyScan;
+using System.Linq;
 
 namespace EnemyScan.Helper
 {
+    [HarmonyPatch(typeof(RoundManager))]
     public static class ScanEnemies
     {
         public static string enemyString = "No Enemies Found.";
 
-        [HarmonyPatch(typeof(RoundManager), "RefreshEnemiesList()")]
+        [HarmonyPatch("AdvanceHourAndSpawnNewBatchOfEnemies")]
         [HarmonyPostfix]
-        public static void GetEnemies(List<EnemyAI> ___spawnedAIs)
+        public static void GetEnemies()
         {
-            enemyString = BuildEnemyCountString(___spawnedAIs);
+            UpdateEnemyCount();
+        }
+        [HarmonyPatch("BeginEnemySpawning")]
+        [HarmonyPostfix]
+        public static void GetInitialEnemies()
+        {
+            UpdateEnemyCount();
+        }
+        private static void UpdateEnemyCount()
+        {
+            EnemyAI[] enemyAIs = UnityEngine.Object.FindObjectsOfType<EnemyAI>();
+            enemyString = BuildEnemyCountString(enemyAIs.ToList());
+            EnemyScan.UpdateEnemyCommand();
         }
         private static string BuildEnemyCountString(List<EnemyAI> enemies)
         {

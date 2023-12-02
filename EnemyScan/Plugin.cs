@@ -34,7 +34,7 @@ namespace EnemyScan
         {
             if (MoonManager.isOnMoon)
             {
-                UpdateKeywordCompatibleNoun("list", "enemies", CreateTerminalNode($"{ScanEnemies.enemyString}.\n", true));
+                UpdateKeywordCompatibleNoun("list", "enemies", CreateTerminalNode($"{ScanEnemies.enemyString}\n", true));
             }
             else
             {
