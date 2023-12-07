@@ -21,3 +21,5 @@ When landed on a moon, running the command shows the type and amount of spawned 
 ### V1.0.0
 
 - Initial release
+
+Can be found [here](https://thunderstore.io/c/lethal-company/p/299792458/ScanForEnemies/)
