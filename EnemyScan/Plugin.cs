@@ -12,7 +12,7 @@ namespace EnemyScan
     {
         private const string modGUID = "299792458.EnemyScan";
         private const string modName = "EnemyScan";
-        private const string modVersion = "1.0.1";
+        private const string modVersion = "1.1.0";
 
         void Awake()
         {
@@ -21,7 +21,7 @@ namespace EnemyScan
             
             TerminalKeyword verbKeyword = CreateTerminalKeyword("list", true);
             TerminalKeyword nounKeyword = CreateTerminalKeyword("enemies");
-            TerminalNode triggerNode = CreateTerminalNode($"ERROR! No Enemies in space\n", true);
+            TerminalNode triggerNode = CreateTerminalNode($"No Enemies Found.\n", true);
 
             verbKeyword = verbKeyword.AddCompatibleNoun(nounKeyword, triggerNode);
             nounKeyword.defaultVerb = verbKeyword;
@@ -32,14 +32,7 @@ namespace EnemyScan
 
         public static void UpdateEnemyCommand()
         {
-            if (MoonManager.isOnMoon)
-            {
-                UpdateKeywordCompatibleNoun("list", "enemies", CreateTerminalNode($"{ScanEnemies.enemyString}\n", true));
-            }
-            else
-            {
-                UpdateKeywordCompatibleNoun("list", "enemies", CreateTerminalNode($"ERROR! No Enemies in space\n", true));
-            }
+            UpdateKeywordCompatibleNoun("list", "enemies", CreateTerminalNode($"{ScanEnemies.enemyString}\n", true));
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using HarmonyLib;
-using EnemyScan;
 using System.Linq;
 
 namespace EnemyScan.Helper
@@ -11,15 +10,9 @@ namespace EnemyScan.Helper
     {
         public static string enemyString = "No Enemies Found.";
 
-        [HarmonyPatch("AdvanceHourAndSpawnNewBatchOfEnemies")]
+        [HarmonyPatch("Update")]
         [HarmonyPostfix]
         public static void GetEnemies()
-        {
-            UpdateEnemyCount();
-        }
-        [HarmonyPatch("BeginEnemySpawning")]
-        [HarmonyPostfix]
-        public static void GetInitialEnemies()
         {
             UpdateEnemyCount();
         }
@@ -60,27 +53,5 @@ namespace EnemyScan.Helper
             }
             return sb.ToString();
         }
-    }
-    [HarmonyPatch(typeof(StartOfRound))]
-    public static class MoonManager
-    {
-        public static bool isOnMoon = true;
-
-        [HarmonyPatch("StartGame")]
-        [HarmonyPostfix]
-        public static void StartingGame()
-        {
-            isOnMoon = true;
-            EnemyScan.UpdateEnemyCommand();
-        }
-
-        [HarmonyPatch("ShipHasLeft")]
-        [HarmonyPostfix]
-        public static void EndingGame()
-        {
-            isOnMoon = false;
-            EnemyScan.UpdateEnemyCommand();
-        }
-
     }
 }
