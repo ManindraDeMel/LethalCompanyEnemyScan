@@ -16,39 +16,15 @@ namespace EnemyScan.Helper
         {
             UpdateEnemyCount();
         }
-        [HarmonyPatch("SpawnEnemiesOutside")]
-        [HarmonyPostfix]
-        public static void SpawnEnemiesOutsideUpdate()
-        {
-            UpdateEnemyCount();
-        }
-        [HarmonyPatch("SpawnDaytimeEnemiesOutside")]
-        [HarmonyPostfix]
-        public static void SpawnDaytimeEnemiesOutsideUpdate()
-        {
-            UpdateEnemyCount();
-        }
-        [HarmonyPatch("SpawnRandomDaytimeEnemy")]
-        [HarmonyPostfix]
-        public static void SpawnRandomDaytimeEnemyUpdate()
-        {
-            UpdateEnemyCount();
-        }
-        [HarmonyPatch("SpawnRandomOutsideEnemy")]
-        [HarmonyPostfix]
-        public static void SpawnRandomOutsideEnemy()
-        {
-            UpdateEnemyCount();
-        }
         [HarmonyPatch("SpawnEnemyFromVent")]
         [HarmonyPostfix]
         public static void SpawnEnemyFromVentUpdate()
         {
             UpdateEnemyCount();
         }
-        [HarmonyPatch("SpawnEnemyOnServer")]
+        [HarmonyPatch("AdvanceHourAndSpawnNewBatchOfEnemies")]
         [HarmonyPostfix]
-        public static void SpawnEnemyOnServerUpdate()
+        public static void AdvanceHourAndSpawnNewBatchOfEnemiesUpdate()
         {
             UpdateEnemyCount();
         }

@@ -48,8 +48,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TerminalApi">
-      <HintPath>..\..\..\..\..\Downloads\NotAtomicBomb-TerminalApi-1.1.0\BepInEx\plugins\TerminalApi.dll</HintPath>
+    <Reference Include="TerminalApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Downloads\Terminal1.3.1\BepInEx\plugins\TerminalApi.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Netcode.Runtime">
       <HintPath>E:\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
