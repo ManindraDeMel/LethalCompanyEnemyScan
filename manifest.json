@@ -1,6 +1,6 @@
 {
     "name": "ScanForEnemies",
-    "version_number": "1.1.0",
+    "version_number": "1.1.1",
     "website_url": "https://github.com/ManindraDeMel/LethalCompanyEnemyScan",
     "description": "Scan for the type and amount of each enemy on the map.",
     "dependencies": [
