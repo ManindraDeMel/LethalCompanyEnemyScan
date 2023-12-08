@@ -8,11 +8,47 @@ namespace EnemyScan.Helper
     [HarmonyPatch(typeof(RoundManager))]
     public static class ScanEnemies
     {
-        public static string enemyString = "No Enemies Found.";
+        public static string enemyString = "No Enemies Found";
 
-        [HarmonyPatch("Update")]
+        [HarmonyPatch("BeginEnemySpawning")]
         [HarmonyPostfix]
-        public static void GetEnemies()
+        public static void BeginEnemySpawningUpdate()
+        {
+            UpdateEnemyCount();
+        }
+        [HarmonyPatch("SpawnEnemiesOutside")]
+        [HarmonyPostfix]
+        public static void SpawnEnemiesOutsideUpdate()
+        {
+            UpdateEnemyCount();
+        }
+        [HarmonyPatch("SpawnDaytimeEnemiesOutside")]
+        [HarmonyPostfix]
+        public static void SpawnDaytimeEnemiesOutsideUpdate()
+        {
+            UpdateEnemyCount();
+        }
+        [HarmonyPatch("SpawnRandomDaytimeEnemy")]
+        [HarmonyPostfix]
+        public static void SpawnRandomDaytimeEnemyUpdate()
+        {
+            UpdateEnemyCount();
+        }
+        [HarmonyPatch("SpawnRandomOutsideEnemy")]
+        [HarmonyPostfix]
+        public static void SpawnRandomOutsideEnemy()
+        {
+            UpdateEnemyCount();
+        }
+        [HarmonyPatch("SpawnEnemyFromVent")]
+        [HarmonyPostfix]
+        public static void SpawnEnemyFromVentUpdate()
+        {
+            UpdateEnemyCount();
+        }
+        [HarmonyPatch("SpawnEnemyOnServer")]
+        [HarmonyPostfix]
+        public static void SpawnEnemyOnServerUpdate()
         {
             UpdateEnemyCount();
         }
@@ -49,7 +85,7 @@ namespace EnemyScan.Helper
             }
             if (sb.ToString() == "")
             {
-                return "No Enemies Found..";
+                return "No Enemies Found.";
             }
             return sb.ToString();
         }
