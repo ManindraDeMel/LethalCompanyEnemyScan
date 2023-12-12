@@ -4,6 +4,8 @@ using TerminalApi;
 using static TerminalApi.TerminalApi;
 using EnemyScan.Helper;
 using System.Reflection;
+using BepInEx.Configuration;
+
 namespace EnemyScan
 {
     [BepInPlugin(modGUID, modName, modVersion)]
@@ -12,13 +14,20 @@ namespace EnemyScan
     {
         private const string modGUID = "299792458.EnemyScan";
         private const string modName = "EnemyScan";
-        private const string modVersion = "1.1.1";
+        private const string modVersion = "1.2.0";
+
+
+        private ConfigEntry<float> cooldown;
+        private ConfigEntry<float> cost;
 
         void Awake()
         {
             Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
-            
+            // Initialize the configuration entries
+            cooldown = Config.Bind("General", "Cooldown", 0f, "Cooldown time for the enemy scan command.");
+            cost = Config.Bind("General", "Cost", 0f, "Cost to execute the enemy scan command.");
+
             TerminalKeyword verbKeyword = CreateTerminalKeyword("list", true);
             TerminalKeyword nounKeyword = CreateTerminalKeyword("enemies");
             TerminalNode triggerNode = CreateTerminalNode($"No Enemies Found.\n", true);
