@@ -9,29 +9,16 @@ namespace EnemyScan.Helper
     public static class ScanEnemies
     {
         public static string enemyString = "No Enemies Found";
-
-        [HarmonyPatch("BeginEnemySpawning")]
+        public static RoundManager roundManager;
+        [HarmonyPatch("Awake")]
         [HarmonyPostfix]
-        public static void BeginEnemySpawningUpdate()
+        public static void Awake(ref RoundManager __instance)
         {
-            UpdateEnemyCount();
+            roundManager = __instance;
         }
-        [HarmonyPatch("SpawnEnemyFromVent")]
-        [HarmonyPostfix]
-        public static void SpawnEnemyFromVentUpdate()
+        public static void UpdateEnemyCount()
         {
-            UpdateEnemyCount();
-        }
-        [HarmonyPatch("AdvanceHourAndSpawnNewBatchOfEnemies")]
-        [HarmonyPostfix]
-        public static void AdvanceHourAndSpawnNewBatchOfEnemiesUpdate()
-        {
-            UpdateEnemyCount();
-        }
-        private static void UpdateEnemyCount()
-        {
-            EnemyAI[] enemyAIs = UnityEngine.Object.FindObjectsOfType<EnemyAI>();
-            enemyString = BuildEnemyCountString(enemyAIs.ToList());
+            enemyString = BuildEnemyCountString(roundManager.SpawnedEnemies);
             EnemyScan.UpdateEnemyCommand();
         }
         private static string BuildEnemyCountString(List<EnemyAI> enemies)
@@ -61,9 +48,18 @@ namespace EnemyScan.Helper
             }
             if (sb.ToString() == "")
             {
-                return "No Enemies Found.";
+                return "No Enemies Found";
             }
             return sb.ToString();
+        }
+    }
+    [HarmonyPatch(typeof(Terminal))]
+    public static class TerminalPatch
+    {
+        [HarmonyPatch("BeginUsingTerminal")]
+        [HarmonyPostfix]
+        public static void BeginUsingTerminal() {
+            ScanEnemies.UpdateEnemyCount();
         }
     }
 }

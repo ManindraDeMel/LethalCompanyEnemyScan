@@ -5,6 +5,7 @@ using static TerminalApi.TerminalApi;
 using EnemyScan.Helper;
 using System.Reflection;
 using BepInEx.Configuration;
+using BepInEx.Logging;
 
 namespace EnemyScan
 {
@@ -20,14 +21,15 @@ namespace EnemyScan
         private ConfigEntry<float> cooldown;
         private ConfigEntry<float> cost;
 
+        private static float lastScanTime = 0f;
+
+        public ManualLogSource logSource;
         void Awake()
         {
-            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
-
             // Initialize the configuration entries
             cooldown = Config.Bind("General", "Cooldown", 0f, "Cooldown time for the enemy scan command.");
             cost = Config.Bind("General", "Cost", 0f, "Cost to execute the enemy scan command.");
-
+            logSource = BepInEx.Logging.Logger.CreateLogSource("logSource");
             TerminalKeyword verbKeyword = CreateTerminalKeyword("list", true);
             TerminalKeyword nounKeyword = CreateTerminalKeyword("enemies");
             TerminalNode triggerNode = CreateTerminalNode($"No Enemies Found.\n", true);
@@ -37,6 +39,8 @@ namespace EnemyScan
 
             AddTerminalKeyword(verbKeyword);
             AddTerminalKeyword(nounKeyword);
+
+            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
         }
 
         public static void UpdateEnemyCommand()
