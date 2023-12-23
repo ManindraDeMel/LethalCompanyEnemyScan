@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using HarmonyLib;
-using System.Linq;
-using BepInEx.Logging;
 
 namespace EnemyScan.Helper
 {

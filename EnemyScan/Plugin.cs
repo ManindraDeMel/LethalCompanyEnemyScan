@@ -4,7 +4,6 @@ using TerminalApi;
 using static TerminalApi.TerminalApi;
 using EnemyScan.Helper;
 using System.Reflection;
-using BepInEx.Configuration;
 using BepInEx.Logging;
 
 namespace EnemyScan
@@ -16,11 +15,6 @@ namespace EnemyScan
         private const string modGUID = "299792458.EnemyScan";
         private const string modName = "EnemyScan";
         private const string modVersion = "1.2.0";
-
-        private ConfigEntry<float> cooldown;
-        private ConfigEntry<float> cost;
-
-        private static float lastScanTime = 0f;
 
         public static ManualLogSource logSource;
         void Awake()
