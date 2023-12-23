@@ -17,19 +17,17 @@ namespace EnemyScan
         private const string modName = "EnemyScan";
         private const string modVersion = "1.2.0";
 
-
         private ConfigEntry<float> cooldown;
         private ConfigEntry<float> cost;
 
         private static float lastScanTime = 0f;
 
-        public ManualLogSource logSource;
+        public static ManualLogSource logSource;
         void Awake()
         {
             // Initialize the configuration entries
-            cooldown = Config.Bind("General", "Cooldown", 0f, "Cooldown time for the enemy scan command.");
-            cost = Config.Bind("General", "Cost", 0f, "Cost to execute the enemy scan command.");
             logSource = BepInEx.Logging.Logger.CreateLogSource("logSource");
+
             TerminalKeyword verbKeyword = CreateTerminalKeyword("list", true);
             TerminalKeyword nounKeyword = CreateTerminalKeyword("enemies");
             TerminalNode triggerNode = CreateTerminalNode($"No Enemies Found.\n", true);

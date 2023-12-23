@@ -2,6 +2,7 @@
 using System.Text;
 using HarmonyLib;
 using System.Linq;
+using BepInEx.Logging;
 
 namespace EnemyScan.Helper
 {
@@ -18,6 +19,11 @@ namespace EnemyScan.Helper
         }
         public static void UpdateEnemyCount()
         {
+            if (roundManager == null)
+            {
+                EnemyScan.logSource.LogWarning("RoundManager instance is null!"); // Logging statement
+                return;
+            }
             enemyString = BuildEnemyCountString(roundManager.SpawnedEnemies);
             EnemyScan.UpdateEnemyCommand();
         }
@@ -53,7 +59,7 @@ namespace EnemyScan.Helper
             return sb.ToString();
         }
     }
-    [HarmonyPatch(typeof(Terminal))]
+    [HarmonyPatch(typeof(Terminal))] // update the list everytime the terminal is entered
     public static class TerminalPatch
     {
         [HarmonyPatch("BeginUsingTerminal")]
