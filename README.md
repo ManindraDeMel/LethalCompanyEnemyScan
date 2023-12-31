@@ -9,7 +9,13 @@ When landed on a moon, running the command shows the type and amount of spawned 
 
 ## ChangeLog
 
-## V1.1.1
+## V1.2.1
+
+- Thanks to contribution from [kohanis](https://github.com/kohanis) the mod should now scan for all players.
+- The code is now cleaner and more efficient
+
+
+### V1.1.1
 
 - Reverted Off Using the `Roundmanager.update` method. This caused a lot of lag.
 - Now postfixing all methods which are associated with enemy spawning
