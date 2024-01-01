@@ -8,10 +8,13 @@ using static TerminalApi.TerminalApi;
 
 namespace EnemyScan;
 
-[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
+[BepInPlugin(modGUID, modName, modVersion)]
 [BepInDependency("atomic.terminalapi")]
 public class EnemyScan : BaseUnityPlugin
 {
+    private const string modGUID = "299792458.EnemyScan";
+    private const string modName = "EnemyScan";
+    private const string modVersion = "1.2.1";
     private const string DefaultString = "No Enemies Found.\n\n";
     private static TerminalNode _triggerNode = null!;
     private static ManualLogSource _log = null!;
